@@ -1,25 +1,144 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VIT-M7-MQH">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <!--Web ViewVC-->
+        <scene sceneID="Ho3-sg-cNW">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewVC" id="5AA-NU-fTr" customClass="WebViewVC" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="maM-Ir-0Q5"/>
+                        <viewControllerLayoutGuide type="bottom" id="t2C-Lt-wTO"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="efW-Uq-aji">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Qj-Pq-Qu7">
+                                <rect key="frame" x="0.0" y="44" width="320" height="504"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CoS-Qs-d0G">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Authentication" id="djr-GN-s2T">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="MzW-Bt-daW">
+                                            <connections>
+                                                <action selector="cancel:" destination="5AA-NU-fTr" id="BsR-Bu-ASc"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0Qj-Pq-Qu7" firstAttribute="top" secondItem="CoS-Qs-d0G" secondAttribute="bottom" id="3v7-SZ-fac"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="0Qj-Pq-Qu7" secondAttribute="bottom" constant="-68" id="bmt-zD-RE2"/>
+                            <constraint firstItem="CoS-Qs-d0G" firstAttribute="leading" secondItem="efW-Uq-aji" secondAttribute="leading" id="nq3-Ww-ICt"/>
+                            <constraint firstItem="CoS-Qs-d0G" firstAttribute="top" secondItem="efW-Uq-aji" secondAttribute="top" id="q28-Sp-gjW"/>
+                            <constraint firstAttribute="trailing" secondItem="CoS-Qs-d0G" secondAttribute="trailing" id="teM-Gd-KeQ"/>
+                            <constraint firstItem="CoS-Qs-d0G" firstAttribute="trailing" secondItem="0Qj-Pq-Qu7" secondAttribute="trailing" id="uCf-S3-7ba"/>
+                            <constraint firstItem="CoS-Qs-d0G" firstAttribute="leading" secondItem="0Qj-Pq-Qu7" secondAttribute="leading" id="xZd-jE-dRL"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="webView" destination="0Qj-Pq-Qu7" id="ILh-BC-uGn"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HzO-TR-Vux" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="194" y="-195"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="vdQ-xl-zsS">
+            <objects>
+                <viewController id="VIT-M7-MQH" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JvP-DI-PDZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="RVN-fu-rBM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aOa-47-z8C">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JY8-nm-Dr8">
+                                <rect key="frame" x="133" y="374" width="55" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="7Dm-dP-PnM"/>
+                                    <constraint firstAttribute="width" constant="55" id="o8M-KS-oqh"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="B1.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goTwitter:" destination="VIT-M7-MQH" eventType="touchUpInside" id="ZDo-RF-OBZ"/>
+                                    <segue destination="rIz-8K-210" kind="show" identifier="goTimeLine" id="WS7-38-7Xt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIJ-Wz-3rQ">
+                                <rect key="frame" x="101" y="221" width="118" height="37"/>
+                                <state key="normal" title="Autorization">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goAutorization:" destination="VIT-M7-MQH" eventType="touchUpInside" id="9QW-4E-o77"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RVN-fu-rBM" firstAttribute="top" secondItem="JY8-nm-Dr8" secondAttribute="bottom" constant="51" id="jxS-P0-NVp"/>
+                            <constraint firstItem="JY8-nm-Dr8" firstAttribute="centerX" secondItem="aOa-47-z8C" secondAttribute="centerX" id="wvN-sd-zs5"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6bw-W8-q6z" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="194" y="349"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="EzH-Tl-CHn">
+            <objects>
+                <viewController id="rIz-8K-210" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uuq-Fb-rpQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="KYN-mT-ok9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UfR-SA-y26">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ntQ-u7-IcI">
+                                <rect key="frame" x="0.0" y="20" width="320" height="462"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="rIz-8K-210" id="NaN-yk-Y3g"/>
+                                    <outlet property="delegate" destination="rIz-8K-210" id="z44-NN-8aR"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ntQ-u7-IcI" firstAttribute="leading" secondItem="UfR-SA-y26" secondAttribute="leading" id="13d-lg-h1h"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="ntQ-u7-IcI" secondAttribute="bottom" constant="-2" id="9Xv-Xb-xdr"/>
+                            <constraint firstItem="ntQ-u7-IcI" firstAttribute="top" secondItem="Uuq-Fb-rpQ" secondAttribute="bottom" id="cBP-CH-pw2"/>
+                            <constraint firstAttribute="trailing" secondItem="ntQ-u7-IcI" secondAttribute="trailing" id="r3S-hH-o5c"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UFX-2c-pul" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="553" y="356"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="B1.png" width="120" height="120"/>
+    </resources>
 </document>
