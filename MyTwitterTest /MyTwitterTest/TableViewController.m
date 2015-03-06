@@ -11,7 +11,6 @@
 @interface TableViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *statuses;
 
 @end
 
@@ -19,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getTimelineAction];
+//    [self getTimelineAction];
     NSLog(@"count is %lu", (unsigned long)self.statuses.count);
     // Do any additional setup after loading the view.
 }
