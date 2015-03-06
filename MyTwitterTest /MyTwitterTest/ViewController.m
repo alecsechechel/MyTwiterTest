@@ -19,7 +19,7 @@
 
 typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage); // don't bother with NSError for that
 
-@interface ViewController ()
+@interface ViewController () <UIActionSheetDelegate>
 - (IBAction)goAutorization:(UIButton *)sender;
 
 @property (nonatomic, strong) STTwitterAPI *twitter;
@@ -27,7 +27,7 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 @property (nonatomic, strong) ACAccountStore *accountStore;
 @property (nonatomic, strong) accountChooserBlock_t accountChooserBlock;
 @property (nonatomic, strong) NSArray *iOSAccounts;
-
+@property (nonatomic, strong) NSArray *statuses;
 
 - (IBAction)goTwitter:(UIButton *)sender;
 
@@ -47,6 +47,22 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 
 #pragma mark - Twitter
 - (IBAction)goTwitter:(UIButton *)sender {
+    // get timeline
+    // maybe need add spinner while perform loading
+    if (!_twitter) {
+        [self showErrorWithTitle:@"Sorry" message:@"You haven't authorized yet."];
+        return;
+    }
+    
+    [_twitter getHomeTimelineSinceID:nil
+                               count:20
+                        successBlock:^(NSArray *statuses) {
+                            self.statuses = statuses;
+                            [self performSegueWithIdentifier:@"goTimeLine" sender:nil];
+                        
+                        } errorBlock:^(NSError *error) {
+                            [self showErrorWithTitle:@"Sorry" message:error.localizedDescription];
+                        }];
     
 }
 
@@ -67,7 +83,6 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
     //_loginStatusLabel.text = @"Trying to login with iOS...";
     
     __weak typeof(self) weakSelf = self;
-    
     self.accountChooserBlock = ^(ACAccount *account, NSString *errorMessage) {
         account  = [[ACAccount alloc] init];
         NSLog(@"username is %@", account.username);
@@ -122,7 +137,7 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
                      oauthCallback:@"myappp://twitter_access_tokens/"
                         errorBlock:^(NSError *error) {
                             NSLog(@"-- error: %@", error);
-                            [self showError];
+                            [self showErrorWithTitle:@"Sorry" message:@"You can't send a tweet right now, make sure your device has an internet connection"];
                         }];
 }
 
@@ -255,12 +270,11 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 }
 
 
-- (void)showError {
-    
+- (void)showErrorWithTitle:(NSString *)title message:(NSString *)msg {
     UIAlertView *alertView = [[UIAlertView alloc]
-                            initWithTitle:@"Sorry"
-                            message:@"You can't send a tweet right now, make sure your device has an internet connection"
-                            delegate:self
+                            initWithTitle:title
+                            message:msg
+                            delegate:nil
                             cancelButtonTitle:@"OK"
                             otherButtonTitles:nil];
     [alertView show];
@@ -276,6 +290,7 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 }
 
 #pragma mark - Next Screen
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"goTimeLine"]) {
         
@@ -284,9 +299,8 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
         
         // Get button tag number (or do whatever you need to do here, based on your object
         vc.twitter = self.twitter;
-        
+        vc.statuses = self.statuses;
     }
-    
 }
 
 

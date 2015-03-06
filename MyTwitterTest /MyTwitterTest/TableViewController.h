@@ -11,7 +11,7 @@
 
 @interface TableViewController : UIViewController
 
-
 @property (nonatomic, strong) STTwitterAPI *twitter;
+@property (nonatomic, strong) NSArray *statuses;
 
 @end
