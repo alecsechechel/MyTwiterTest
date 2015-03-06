@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getTimelineAction];
-    NSLog(@"count is %@", self.statuses.count);
+    NSLog(@"count is %lu", (unsigned long)self.statuses.count);
     // Do any additional setup after loading the view.
 }
 
