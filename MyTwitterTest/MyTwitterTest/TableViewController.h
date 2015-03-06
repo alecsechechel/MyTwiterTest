@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STTwitter.h"
 
 @interface TableViewController : UIViewController
 
-@property (nonatomic, strong) NSArray *statuses;
+
+@property (nonatomic, strong) STTwitterAPI *twitter;
 
 @end

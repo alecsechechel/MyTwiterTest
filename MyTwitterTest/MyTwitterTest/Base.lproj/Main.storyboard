@@ -102,10 +102,10 @@
             </objects>
             <point key="canvasLocation" x="194" y="349"/>
         </scene>
-        <!--View Controller-->
+        <!--Table View Controller-->
         <scene sceneID="EzH-Tl-CHn">
             <objects>
-                <viewController id="rIz-8K-210" sceneMemberID="viewController">
+                <viewController id="rIz-8K-210" customClass="TableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uuq-Fb-rpQ"/>
                         <viewControllerLayoutGuide type="bottom" id="KYN-mT-ok9"/>
@@ -118,7 +118,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="462"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="rIz-8K-210" id="NaN-yk-Y3g"/>
+                                    <outlet property="dataSource" destination="rIz-8K-210" id="ZVE-99-qgO"/>
                                     <outlet property="delegate" destination="rIz-8K-210" id="z44-NN-8aR"/>
                                 </connections>
                             </tableView>
@@ -132,6 +132,9 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="ntQ-u7-IcI" id="mL3-58-dsz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFX-2c-pul" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

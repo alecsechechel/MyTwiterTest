@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "TableViewController.h"
 #import "Chameleon.h"
 #import <Social/Social.h>
 #import "STTwitter.h"
@@ -273,4 +274,20 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
         [self loginOnTheWebAction];
     }
 }
+
+#pragma mark - Next Screen
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"goTimeLine"]) {
+        
+        // Get destination view
+        TableViewController *vc = [segue destinationViewController];
+        
+        // Get button tag number (or do whatever you need to do here, based on your object
+        vc.twitter = self.twitter;
+        
+    }
+    
+}
+
+
 @end

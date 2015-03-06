@@ -10,12 +10,17 @@
 
 @interface TableViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *statuses;
+
 @end
 
 @implementation TableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getTimelineAction];
+    NSLog(@"count is %@", self.statuses.count);
     // Do any additional setup after loading the view.
 }
 
@@ -49,6 +54,24 @@
     cell.detailTextLabel.text = [NSString stringWithFormat:@"@%@ | %@", screenName, dateString];
     
     return cell;
+}
+
+#pragma mark Twitter
+- (void)getTimelineAction {
+    
+    [_twitter getHomeTimelineSinceID:nil
+                               count:20
+                        successBlock:^(NSArray *statuses) {
+                            
+                            NSLog(@"-- statuses: %@", statuses);
+                            
+                            self.statuses = statuses;
+                            
+                           // [self.tableView reloadData];
+                            
+                        } errorBlock:^(NSError *error) {
+//                            self.getTimelineStatusLabel.text = [error localizedDescription];
+                        }];
 }
 
 /*
