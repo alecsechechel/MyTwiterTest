@@ -17,7 +17,7 @@
 #define CONSUMER_KEY @"7GjBz4QotE08eACaJMPQevCrF"
 #define CONSUMER_SECRET @"82ZnuE9IcJskgNzVZnu4nDqYASdl9VkqfYsv6QgoXFHC0X0QtX"
 
-typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage); // don't bother with NSError for that
+typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage);
 
 @interface ViewController ()
 - (IBAction)goAutorization:(UIButton *)sender;
@@ -42,7 +42,6 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Twitter
@@ -64,8 +63,6 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 
 - (void)loginWithiOSAction {
     
-    //_loginStatusLabel.text = @"Trying to login with iOS...";
-    
     __weak typeof(self) weakSelf = self;
     
     self.accountChooserBlock = ^(ACAccount *account, NSString *errorMessage) {
@@ -79,8 +76,6 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
         } else {
             status = errorMessage;
         }
-        
-      // weakSelf.errorText = status;
     };
     
     [self chooseAccount];
@@ -92,10 +87,8 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
     
     [_twitter verifyCredentialsWithSuccessBlock:^(NSString *username) {
         
-//    _errorText = [NSString stringWithFormat:@"@%@", username];
-        
     } errorBlock:^(NSError *error) {
-//      _errorText = [error localizedDescription];
+
     }];
     
 }
@@ -127,7 +120,7 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 }
 
 - (void)chooseAccount {
-    
+  
     ACAccountType *accountType = [_accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
     ACAccountStoreRequestAccessCompletionHandler accountStoreRequestCompletionHandler = ^(BOOL granted, NSError *error) {
@@ -184,7 +177,6 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
         self.accountChooserBlock = ^(ACAccount *account, NSString *errorMessage) {
             
             if(account == nil) {
-//                weakSelf.errorText = errorMessage;
                 return;
             }
             
@@ -194,8 +186,6 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
                 
                 [twitterAPIOS postReverseAuthAccessTokenWithAuthenticationHeader:authenticationHeader successBlock:^(NSString *oAuthToken, NSString *oAuthTokenSecret, NSString *userID, NSString *screenName) {
                     
-//                    weakSelf.loginStatusLabel.text = [NSString stringWithFormat:@"Reverse auth. success for @%@", screenName];
-                    
                     NSLog(@"-- REVERSE AUTH OK");
                     NSLog(@"-- you can now access @%@ account (ID: %@) with specified consumer tokens and the following access tokens:", screenName, userID);
                     NSLog(@"-- oAuthToken: %@", oAuthToken);
@@ -204,11 +194,11 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
                     weakSelf.weakTwitter = [STTwitterAPI twitterAPIWithOAuthConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET oauthToken:oAuthToken oauthTokenSecret:oAuthTokenSecret];
                     
                 } errorBlock:^(NSError *error) {
-//                   weakSelf.errorText = [error localizedDescription];
+
                 }];
                 
             } errorBlock:^(NSError *error) {
-//               weakSelf.errorText = [error localizedDescription];
+
             }];
             
         };
@@ -216,41 +206,19 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
         [self chooseAccount];
         
     } errorBlock:^(NSError *error) {
-//        weakSelf.errorText = [error localizedDescription];
+
     }];
 }
 
 - (void)setOAuthToken:(NSString *)token oauthVerifier:(NSString *)verifier {
     
     // in case the user has just authenticated through WebViewVC
-    [self dismissViewControllerAnimated:YES completion:^{
-        //
-    }];
+    [self dismissViewControllerAnimated:YES completion:^{ }];
     
     [_twitter postAccessTokenRequestWithPIN:verifier successBlock:^(NSString *oauthToken, NSString *oauthTokenSecret, NSString *userID, NSString *screenName) {
         NSLog(@"-- screenName: %@", screenName);
-        
-        //_loginStatusLabel.text = screenName;
-        
-        /*
-         At this point, the user can use the API and you can read his access tokens with:
-         
-         _twitter.oauthAccessToken;
-         _twitter.oauthAccessTokenSecret;
-         
-         You can store these tokens (in user default, or in keychain) so that the user doesn't need to authenticate again on next launches.
-         
-         Next time, just instanciate STTwitter with the class method:
-         
-         +[STTwitterAPI twitterAPIWithOAuthConsumerKey:consumerSecret:oauthToken:oauthTokenSecret:]
-         
-         Don't forget to call the -[STTwitter verifyCredentialsWithSuccessBlock:errorBlock:] after that.
-         */
-        
     } errorBlock:^(NSError *error) {
         
-       // _loginStatusLabel.text = [error localizedDescription];
-        NSLog(@"-- %@", [error localizedDescription]);
     }];
 }
 
@@ -279,14 +247,10 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"goTimeLine"]) {
         
-        // Get destination view
         TableViewController *vc = [segue destinationViewController];
         
-        // Get button tag number (or do whatever you need to do here, based on your object
         vc.twitter = self.twitter;
-        
     }
-    
 }
 
 

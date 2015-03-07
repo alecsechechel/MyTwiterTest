@@ -21,12 +21,10 @@
     [super viewDidLoad];
     [self getTimelineAction];
     NSLog(@"count is %lu", (unsigned long)self.statuses.count);
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - TableView
@@ -67,10 +65,10 @@
                             
                             self.statuses = statuses;
                             
-                           // [self.tableView reloadData];
+                            [self.tableView reloadData];
                             
                         } errorBlock:^(NSError *error) {
-//                            self.getTimelineStatusLabel.text = [error localizedDescription];
+                            
                         }];
 }
 
