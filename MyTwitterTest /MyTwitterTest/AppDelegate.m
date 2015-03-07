@@ -43,6 +43,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
 - (NSDictionary *)parametersDictionaryFromQueryString:(NSString *)queryString {
     
     NSMutableDictionary *md = [NSMutableDictionary dictionary];
@@ -72,6 +73,13 @@
     NSString *token = d[@"oauth_token"];
     NSString *verifier = d[@"oauth_verifier"];
     
+//    UIViewController *vc = (UIViewController *)[[self window] rootViewController];
+//    NSArray * array = [vc.navigationController viewControllers];
+//    NSLog(@"count is %i", array.count);
+//    ViewController *rootViewController = [[vc.navigationController viewControllers] firstObject];
+//    ViewController *rootViewController = [vc.navigationController.viewControllers firstObject];
+//    
+////    ViewController *rootViewController = [self.navi firstObject];
     ViewController *vc = (ViewController *)[[self window] rootViewController];
     [vc setOAuthToken:token oauthVerifier:verifier];
     

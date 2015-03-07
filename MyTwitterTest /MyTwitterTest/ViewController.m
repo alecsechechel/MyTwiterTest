@@ -19,7 +19,7 @@
 
 typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage);
 
-@interface ViewController ()
+@interface ViewController () <UIActionSheetDelegate>
 - (IBAction)goAutorization:(UIButton *)sender;
 
 @property (nonatomic, strong) STTwitterAPI *twitter;
@@ -27,7 +27,8 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 @property (nonatomic, strong) ACAccountStore *accountStore;
 @property (nonatomic, strong) accountChooserBlock_t accountChooserBlock;
 @property (nonatomic, strong) NSArray *iOSAccounts;
-
+@property (nonatomic, strong) NSArray *statuses;
+@property (nonatomic, strong) ACAccount* account;
 
 - (IBAction)goTwitter:(UIButton *)sender;
 
@@ -38,6 +39,10 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithGradientStyle:UIGradientStyleTopToBottom withFrame:self.view.frame andColors: @[[UIColor flatWhiteColor], [UIColor flatWhiteColorDark]]];
+    
+    [self checkLoginInSettings];
+    
+   // [self chooseAccount];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,6 +51,22 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 
 #pragma mark - Twitter
 - (IBAction)goTwitter:(UIButton *)sender {
+    // get timeline
+    // maybe need add spinner while perform loading
+    if (!_twitter) {
+        [self showErrorWithTitle:@"Sorry" message:@"You haven't authorized yet."];
+        return;
+    }
+//
+//    [_twitter getHomeTimelineSinceID:nil
+//                               count:20
+//                        successBlock:^(NSArray *statuses) {
+//                            self.statuses = statuses;
+//                            [self performSegueWithIdentifier:@"goTimeLine" sender:nil];
+//                        
+//                        } errorBlock:^(NSError *error) {
+//                            [self showErrorWithTitle:@"Sorry" message:error.localizedDescription];
+//                        }];
     
 }
 
@@ -64,14 +85,13 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 - (void)loginWithiOSAction {
     
     __weak typeof(self) weakSelf = self;
-    
     self.accountChooserBlock = ^(ACAccount *account, NSString *errorMessage) {
         account  = [[ACAccount alloc] init];
         NSLog(@"username is %@", account.username);
         NSString *status = nil;
         if(account) {
             status = [NSString stringWithFormat:@"Did select %@", account.username];
-            
+            weakSelf.account = account;
             [weakSelf loginWithiOSAccount:account];
         } else {
             status = errorMessage;
@@ -115,24 +135,27 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
                      oauthCallback:@"myappp://twitter_access_tokens/"
                         errorBlock:^(NSError *error) {
                             NSLog(@"-- error: %@", error);
-                            [self showError];
+                            [self showErrorWithTitle:@"Sorry" message:@"You can't send a tweet right now, make sure your device has an internet connection"];
                         }];
 }
 
 - (void)chooseAccount {
-  
-    ACAccountType *accountType = [_accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
-    ACAccountStoreRequestAccessCompletionHandler accountStoreRequestCompletionHandler = ^(BOOL granted, NSError *error) {
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            
-            if(granted == NO) {
-                _accountChooserBlock(nil, @"Acccess not granted.");
-                return;
-            }
-            
-            self.iOSAccounts = [_accountStore accountsWithAccountType:accountType];
-            
+    static ACAccountStore* accountStore;
+    static ACAccountType* accountType;
+    
+    accountStore = [ACAccountStore new];
+    accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    __weak typeof (self) weakSelf = self;
+    
+    [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
+        __strong typeof(self) self = weakSelf;
+        
+        if (granted) {
+            NSLog(@"Work");
+            self.iOSAccounts = [accountStore accountsWithAccountType:accountType];
+
             if([_iOSAccounts count] == 1) {
                 ACAccount *account = [_iOSAccounts lastObject];
                 _accountChooserBlock(account, nil);
@@ -146,24 +169,8 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
                 }
                 [as showInView:self.view.window];
             }
-        }];
-    };
-    
-#if TARGET_OS_IPHONE &&  (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0)
-    if (floor(NSFoundationVersionNumber) < NSFoundationVersionNumber_iOS_6_0) {
-        [self.accountStore requestAccessToAccountsWithType:accountType
-                                     withCompletionHandler:accountStoreRequestCompletionHandler];
-    } else {
-        [self.accountStore requestAccessToAccountsWithType:accountType
-                                                   options:NULL
-                                                completion:accountStoreRequestCompletionHandler];
-    }
-#else
-    [self.accountStore requestAccessToAccountsWithType:accountType
-                                               options:NULL
-                                            completion:accountStoreRequestCompletionHandler];
-#endif
-    
+        }
+    }];
 }
 
 - (void)reverseAuthAction {
@@ -191,7 +198,7 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
                     NSLog(@"-- oAuthToken: %@", oAuthToken);
                     NSLog(@"-- oAuthTokenSecret: %@", oAuthTokenSecret);
                     
-                    weakSelf.weakTwitter = [STTwitterAPI twitterAPIWithOAuthConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET oauthToken:oAuthToken oauthTokenSecret:oAuthTokenSecret];
+                    weakSelf.twitter = [STTwitterAPI twitterAPIWithOAuthConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET oauthToken:oAuthToken oauthTokenSecret:oAuthTokenSecret];
                     
                 } errorBlock:^(NSError *error) {
 
@@ -223,12 +230,11 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 }
 
 
-- (void)showError {
-    
+- (void)showErrorWithTitle:(NSString *)title message:(NSString *)msg {
     UIAlertView *alertView = [[UIAlertView alloc]
-                            initWithTitle:@"Sorry"
-                            message:@"You can't send a tweet right now, make sure your device has an internet connection"
-                            delegate:self
+                            initWithTitle:title
+                            message:msg
+                            delegate:nil
                             cancelButtonTitle:@"OK"
                             otherButtonTitles:nil];
     [alertView show];
@@ -238,18 +244,20 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 #pragma mark - Autorization
 
 - (IBAction)goAutorization:(UIButton *)sender {
-    if ([self checkLoginInSettings]) {
+    //if ([self checkLoginInSettings]) {
         [self loginOnTheWebAction];
-    }
+   // }
 }
 
 #pragma mark - Next Screen
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"goTimeLine"]) {
-        
+
         TableViewController *vc = [segue destinationViewController];
         
         vc.twitter = self.twitter;
+        vc.account = self.account;
     }
 }
 

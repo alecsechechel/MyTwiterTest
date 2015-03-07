@@ -612,6 +612,7 @@
 				FABAAD991AA9F11000E17B95 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FABAAD9A1AA9F11000E17B95 /* Build configuration list for PBXNativeTarget "MyTwitterTestTests" */ = {
 			isa = XCConfigurationList;
@@ -620,6 +621,7 @@
 				FABAAD9C1AA9F11000E17B95 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
