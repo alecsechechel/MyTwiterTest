@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA40EE5C1AAD0EF700470737 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FA40EE5B1AAD0EF700470737 /* Reachability.m */; };
 		FA4883CE1AAB468700E2C6FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4883CD1AAB468700E2C6FA /* AppDelegate.m */; };
+		FABA1D561AAC387B0057D393 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = FABA1D541AAC387B0057D393 /* edit.png */; };
+		FABA1D571AAC387B0057D393 /* edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FABA1D551AAC387B0057D393 /* edit@2x.png */; };
 		FABAADFF1AAA0D0500E17B95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FABAADFE1AAA0D0500E17B95 /* main.m */; };
 		FABAAE081AAA0D0500E17B95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FABAAE061AAA0D0500E17B95 /* Main.storyboard */; };
 		FABAAE0A1AAA0D0500E17B95 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABAAE091AAA0D0500E17B95 /* Images.xcassets */; };
@@ -29,14 +32,20 @@
 		FABAAE521AAA0E0500E17B95 /* NSError+STTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = FABAAE471AAA0E0500E17B95 /* NSError+STTwitter.m */; };
 		FABAAE571AAA0E1500E17B95 /* JSONSyntaxHighlight.m in Sources */ = {isa = PBXBuildFile; fileRef = FABAAE541AAA0E1500E17B95 /* JSONSyntaxHighlight.m */; };
 		FABAAE581AAA0E1500E17B95 /* STHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FABAAE561AAA0E1500E17B95 /* STHTTPRequest.m */; };
+		FAEAF6A01AAB93B000454BFE /* MCSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEAF69F1AAB93B000454BFE /* MCSwipeTableViewCell.m */; };
+		FAEAF6A41AAB9B1A00454BFE /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = FAEAF6A21AAB9B1A00454BFE /* cross.png */; };
+		FAEAF6A51AAB9B1A00454BFE /* cross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FAEAF6A31AAB9B1A00454BFE /* cross@2x.png */; };
+		FAEAF6A91AAB9B6100454BFE /* B1.png in Resources */ = {isa = PBXBuildFile; fileRef = FAEAF6A81AAB9B6100454BFE /* B1.png */; };
 		FAFC63E71AAB485200A8C143 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFC63E41AAB485200A8C143 /* ViewController.m */; };
 		FAFC63E81AAB485200A8C143 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFC63E61AAB485200A8C143 /* TableViewController.m */; };
-		FAFC63EA1AAB488800A8C143 /* B1.png in Resources */ = {isa = PBXBuildFile; fileRef = FAFC63E91AAB488800A8C143 /* B1.png */; };
+		FAFC63EA1AAB488800A8C143 /* B1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FAFC63E91AAB488800A8C143 /* B1@2x.png */; };
 		FAFC63F81AAB48C000A8C143 /* ChameleonStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFC63EF1AAB48C000A8C143 /* ChameleonStatusBar.m */; };
 		FAFC63F91AAB48C000A8C143 /* NSArray+Chameleon.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFC63F11AAB48C000A8C143 /* NSArray+Chameleon.m */; };
 		FAFC63FA1AAB48C000A8C143 /* UIColor+Chameleon.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFC63F31AAB48C000A8C143 /* UIColor+Chameleon.m */; };
 		FAFC63FB1AAB48C000A8C143 /* UIColor+CIELAB.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFC63F51AAB48C000A8C143 /* UIColor+CIELAB.m */; };
 		FAFC63FC1AAB48C000A8C143 /* UIViewController+Chameleon.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFC63F71AAB48C000A8C143 /* UIViewController+Chameleon.m */; };
+		FAFC64001AAB4A6600A8C143 /* TweetComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFC63FE1AAB4A6600A8C143 /* TweetComposeViewController.m */; };
+		FAFC64011AAB4A6600A8C143 /* TweetComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFC63FF1AAB4A6600A8C143 /* TweetComposeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +59,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA40EE5A1AAD0EF700470737 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		FA40EE5B1AAD0EF700470737 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		FA4883CC1AAB468700E2C6FA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FA4883CD1AAB468700E2C6FA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FABA1D541AAC387B0057D393 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		FABA1D551AAC387B0057D393 /* edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@2x.png"; sourceTree = "<group>"; };
 		FABAADF91AAA0D0500E17B95 /* MyTwiterTestNew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTwiterTestNew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABAADFD1AAA0D0500E17B95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FABAADFE1AAA0D0500E17B95 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -92,11 +105,16 @@
 		FABAAE541AAA0E1500E17B95 /* JSONSyntaxHighlight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONSyntaxHighlight.m; sourceTree = "<group>"; };
 		FABAAE551AAA0E1500E17B95 /* STHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHTTPRequest.h; sourceTree = "<group>"; };
 		FABAAE561AAA0E1500E17B95 /* STHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHTTPRequest.m; sourceTree = "<group>"; };
+		FAEAF69E1AAB93B000454BFE /* MCSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSwipeTableViewCell.h; sourceTree = "<group>"; };
+		FAEAF69F1AAB93B000454BFE /* MCSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSwipeTableViewCell.m; sourceTree = "<group>"; };
+		FAEAF6A21AAB9B1A00454BFE /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
+		FAEAF6A31AAB9B1A00454BFE /* cross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@2x.png"; sourceTree = "<group>"; };
+		FAEAF6A81AAB9B6100454BFE /* B1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = B1.png; path = MyTwiterTestNew/B1.png; sourceTree = "<group>"; };
 		FAFC63E31AAB485200A8C143 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		FAFC63E41AAB485200A8C143 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		FAFC63E51AAB485200A8C143 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		FAFC63E61AAB485200A8C143 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
-		FAFC63E91AAB488800A8C143 /* B1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = B1.png; sourceTree = "<group>"; };
+		FAFC63E91AAB488800A8C143 /* B1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "B1@2x.png"; path = "MyTwiterTestNew/B1@2x.png"; sourceTree = "<group>"; };
 		FAFC63EC1AAB48C000A8C143 /* Chameleon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chameleon.h; sourceTree = "<group>"; };
 		FAFC63ED1AAB48C000A8C143 /* ChameleonMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChameleonMacros.h; sourceTree = "<group>"; };
 		FAFC63EE1AAB48C000A8C143 /* ChameleonStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChameleonStatusBar.h; sourceTree = "<group>"; };
@@ -109,6 +127,9 @@
 		FAFC63F51AAB48C000A8C143 /* UIColor+CIELAB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CIELAB.m"; sourceTree = "<group>"; };
 		FAFC63F61AAB48C000A8C143 /* UIViewController+Chameleon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Chameleon.h"; sourceTree = "<group>"; };
 		FAFC63F71AAB48C000A8C143 /* UIViewController+Chameleon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Chameleon.m"; sourceTree = "<group>"; };
+		FAFC63FD1AAB4A6600A8C143 /* TweetComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetComposeViewController.h; sourceTree = "<group>"; };
+		FAFC63FE1AAB4A6600A8C143 /* TweetComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetComposeViewController.m; sourceTree = "<group>"; };
+		FAFC63FF1AAB4A6600A8C143 /* TweetComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetComposeViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,10 +153,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA6AF7FE1AAC6AF0005C686B /* InternetConection */ = {
+			isa = PBXGroup;
+			children = (
+				FA40EE5A1AAD0EF700470737 /* Reachability.h */,
+				FA40EE5B1AAD0EF700470737 /* Reachability.m */,
+			);
+			name = InternetConection;
+			sourceTree = "<group>";
+		};
 		FABAADF01AAA0D0500E17B95 = {
 			isa = PBXGroup;
 			children = (
-				FABAAE321AAA0DEE00E17B95 /* STTwiter */,
+				FAEAF6961AAB910200454BFE /* Libraries */,
+				FAEAF6A11AAB9B0500454BFE /* Images */,
 				FABAAE281AAA0D2800E17B95 /* Framework */,
 				FABAADFB1AAA0D0500E17B95 /* MyTwiterTestNew */,
 				FABAAE151AAA0D0600E17B95 /* MyTwiterTestNewTests */,
@@ -165,7 +196,6 @@
 		FABAADFC1AAA0D0500E17B95 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FAFC63E91AAB488800A8C143 /* B1.png */,
 				FABAAE091AAA0D0500E17B95 /* Images.xcassets */,
 				FABAAE0B1AAA0D0500E17B95 /* LaunchScreen.xib */,
 				FABAADFD1AAA0D0500E17B95 /* Info.plist */,
@@ -206,7 +236,6 @@
 		FABAAE321AAA0DEE00E17B95 /* STTwiter */ = {
 			isa = PBXGroup;
 			children = (
-				FAFC63EB1AAB48AF00A8C143 /* Chameleon */,
 				FABAAE531AAA0E1500E17B95 /* JSONSyntaxHighlight.h */,
 				FABAAE541AAA0E1500E17B95 /* JSONSyntaxHighlight.m */,
 				FABAAE551AAA0E1500E17B95 /* STHTTPRequest.h */,
@@ -238,6 +267,39 @@
 			path = MyTwiterTestNew;
 			sourceTree = "<group>";
 		};
+		FAEAF6961AAB910200454BFE /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				FA6AF7FE1AAC6AF0005C686B /* InternetConection */,
+				FAEAF6971AAB912E00454BFE /* Swipe */,
+				FAFC63EB1AAB48AF00A8C143 /* Chameleon */,
+				FABAAE321AAA0DEE00E17B95 /* STTwiter */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		FAEAF6971AAB912E00454BFE /* Swipe */ = {
+			isa = PBXGroup;
+			children = (
+				FAEAF69E1AAB93B000454BFE /* MCSwipeTableViewCell.h */,
+				FAEAF69F1AAB93B000454BFE /* MCSwipeTableViewCell.m */,
+			);
+			name = Swipe;
+			sourceTree = "<group>";
+		};
+		FAEAF6A11AAB9B0500454BFE /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				FAEAF6A21AAB9B1A00454BFE /* cross.png */,
+				FAEAF6A31AAB9B1A00454BFE /* cross@2x.png */,
+				FAEAF6A81AAB9B6100454BFE /* B1.png */,
+				FAFC63E91AAB488800A8C143 /* B1@2x.png */,
+				FABA1D541AAC387B0057D393 /* edit.png */,
+				FABA1D551AAC387B0057D393 /* edit@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		FAFC63E11AAB479300A8C143 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +309,9 @@
 				FAFC63E61AAB485200A8C143 /* TableViewController.m */,
 				FABAAE2E1AAA0DA200E17B95 /* WebViewVC.h */,
 				FABAAE2F1AAA0DA200E17B95 /* WebViewVC.m */,
+				FAFC63FD1AAB4A6600A8C143 /* TweetComposeViewController.h */,
+				FAFC63FE1AAB4A6600A8C143 /* TweetComposeViewController.m */,
+				FAFC63FF1AAB4A6600A8C143 /* TweetComposeViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -276,6 +341,7 @@
 				FAFC63F71AAB48C000A8C143 /* UIViewController+Chameleon.m */,
 			);
 			name = Chameleon;
+			path = MyTwiterTestNew;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,9 +424,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAFC63EA1AAB488800A8C143 /* B1.png in Resources */,
+				FAEAF6A41AAB9B1A00454BFE /* cross.png in Resources */,
+				FAFC63EA1AAB488800A8C143 /* B1@2x.png in Resources */,
+				FABA1D561AAC387B0057D393 /* edit.png in Resources */,
 				FABAAE081AAA0D0500E17B95 /* Main.storyboard in Resources */,
+				FAFC64011AAB4A6600A8C143 /* TweetComposeViewController.xib in Resources */,
+				FAEAF6A91AAB9B6100454BFE /* B1.png in Resources */,
+				FAEAF6A51AAB9B1A00454BFE /* cross@2x.png in Resources */,
 				FABAAE0D1AAA0D0500E17B95 /* LaunchScreen.xib in Resources */,
+				FABA1D571AAC387B0057D393 /* edit@2x.png in Resources */,
 				FABAAE0A1AAA0D0500E17B95 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,6 +455,8 @@
 				FAFC63FB1AAB48C000A8C143 /* UIColor+CIELAB.m in Sources */,
 				FABAAE311AAA0DA200E17B95 /* WebViewVC.m in Sources */,
 				FAFC63E81AAB485200A8C143 /* TableViewController.m in Sources */,
+				FA40EE5C1AAD0EF700470737 /* Reachability.m in Sources */,
+				FAEAF6A01AAB93B000454BFE /* MCSwipeTableViewCell.m in Sources */,
 				FABAAE491AAA0E0500E17B95 /* NSString+STTwitter.m in Sources */,
 				FABAAE4A1AAA0E0500E17B95 /* NSDateFormatter+STTwitter.m in Sources */,
 				FAFC63F91AAB48C000A8C143 /* NSArray+Chameleon.m in Sources */,
@@ -392,6 +466,7 @@
 				FABAAE4E1AAA0E0500E17B95 /* STTwitterHTML.m in Sources */,
 				FABAAE4D1AAA0E0500E17B95 /* STTwitterAppOnly.m in Sources */,
 				FABAAE581AAA0E1500E17B95 /* STHTTPRequest.m in Sources */,
+				FAFC64001AAB4A6600A8C143 /* TweetComposeViewController.m in Sources */,
 				FAFC63E71AAB485200A8C143 /* ViewController.m in Sources */,
 				FABAAE521AAA0E0500E17B95 /* NSError+STTwitter.m in Sources */,
 				FAFC63FA1AAB48C000A8C143 /* UIColor+Chameleon.m in Sources */,

@@ -13,6 +13,7 @@
 #import "STTwitter.h"
 #import "WebViewVC.h"
 #import <Accounts/Accounts.h>
+#import "Reachability.h"
 
 #define CONSUMER_KEY @"7GjBz4QotE08eACaJMPQevCrF"
 #define CONSUMER_SECRET @"82ZnuE9IcJskgNzVZnu4nDqYASdl9VkqfYsv6QgoXFHC0X0QtX"
@@ -20,7 +21,6 @@
 typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage);
 
 @interface ViewController () <UIActionSheetDelegate>
-- (IBAction)goAutorization:(UIButton *)sender;
 
 @property (nonatomic, strong) STTwitterAPI *twitter;
 @property (nonatomic, weak) STTwitterAPI *weakTwitter;
@@ -32,6 +32,8 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 
 - (IBAction)goTwitter:(UIButton *)sender;
 
+
+@property (nonatomic, assign) BOOL isLoginUseWeb;
 @end
 
 @implementation ViewController
@@ -40,44 +42,36 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithGradientStyle:UIGradientStyleTopToBottom withFrame:self.view.frame andColors: @[[UIColor flatWhiteColor], [UIColor flatWhiteColorDark]]];
     
+    self.isLoginUseWeb = false;
     [self checkLoginInSettings];
-    
-   // [self chooseAccount];
 }
 
+
+
+                                                                                              
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 #pragma mark - Twitter
 - (IBAction)goTwitter:(UIButton *)sender {
-    // get timeline
-    // maybe need add spinner while perform loading
-    if (!_twitter) {
-        [self showErrorWithTitle:@"Sorry" message:@"You haven't authorized yet."];
-        return;
+    if ([self currentNetworkStatus]) {
+        if (self.isLoginUseWeb) {
+            [self callTableView];
+        } else {
+            [self checkMessage:@"" message:@"Хотите использовать account по умолчанию?"];
+        }
+    } else {
+        [self showErrorWithTitle:@"Sorry" message:@"You can't send a tweet right now, make sure your device has an internet connection"];
     }
-//
-//    [_twitter getHomeTimelineSinceID:nil
-//                               count:20
-//                        successBlock:^(NSArray *statuses) {
-//                            self.statuses = statuses;
-//                            [self performSegueWithIdentifier:@"goTimeLine" sender:nil];
-//                        
-//                        } errorBlock:^(NSError *error) {
-//                            [self showErrorWithTitle:@"Sorry" message:error.localizedDescription];
-//                        }];
-    
-}
+ }
 
 - (BOOL)checkLoginInSettings {
     [self loginWithiOSAction];
     [self reverseAuthAction];
     if (self.weakTwitter == nil) {
-        NSLog(@"Work with cites");
         return true;
     } else {
-        NSLog(@"Work without cites");
         return false;
     }
 }
@@ -87,7 +81,6 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
     __weak typeof(self) weakSelf = self;
     self.accountChooserBlock = ^(ACAccount *account, NSString *errorMessage) {
         account  = [[ACAccount alloc] init];
-        NSLog(@"username is %@", account.username);
         NSString *status = nil;
         if(account) {
             status = [NSString stringWithFormat:@"Did select %@", account.username];
@@ -119,9 +112,6 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
                                                  consumerSecret:CONSUMER_SECRET];
     
     [_twitter postTokenRequest:^(NSURL *url, NSString *oauthToken) {
-        NSLog(@"-- url: %@", url);
-        NSLog(@"-- oauthToken: %@", oauthToken);
-        
         WebViewVC *webViewVC = [self.storyboard instantiateViewControllerWithIdentifier:@"WebViewVC"];
         
         [self presentViewController:webViewVC animated:YES completion:^{
@@ -192,13 +182,9 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
             [twitterAPIOS verifyCredentialsWithSuccessBlock:^(NSString *username) {
                 
                 [twitterAPIOS postReverseAuthAccessTokenWithAuthenticationHeader:authenticationHeader successBlock:^(NSString *oAuthToken, NSString *oAuthTokenSecret, NSString *userID, NSString *screenName) {
-                    
-                    NSLog(@"-- REVERSE AUTH OK");
-                    NSLog(@"-- you can now access @%@ account (ID: %@) with specified consumer tokens and the following access tokens:", screenName, userID);
-                    NSLog(@"-- oAuthToken: %@", oAuthToken);
-                    NSLog(@"-- oAuthTokenSecret: %@", oAuthTokenSecret);
-                    
                     weakSelf.twitter = [STTwitterAPI twitterAPIWithOAuthConsumerKey:CONSUMER_KEY consumerSecret:CONSUMER_SECRET oauthToken:oAuthToken oauthTokenSecret:oAuthTokenSecret];
+                    
+                    weakSelf.account = account;
                     
                 } errorBlock:^(NSError *error) {
 
@@ -219,11 +205,10 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 
 - (void)setOAuthToken:(NSString *)token oauthVerifier:(NSString *)verifier {
     
-    // in case the user has just authenticated through WebViewVC
     [self dismissViewControllerAnimated:YES completion:^{ }];
     
     [_twitter postAccessTokenRequestWithPIN:verifier successBlock:^(NSString *oauthToken, NSString *oauthTokenSecret, NSString *userID, NSString *screenName) {
-        NSLog(@"-- screenName: %@", screenName);
+        self.isLoginUseWeb = true;
     } errorBlock:^(NSError *error) {
         
     }];
@@ -241,25 +226,60 @@ typedef void (^accountChooserBlock_t)(ACAccount *account, NSString *errorMessage
 
 }
 
-#pragma mark - Autorization
-
-- (IBAction)goAutorization:(UIButton *)sender {
-    //if ([self checkLoginInSettings]) {
-        [self loginOnTheWebAction];
-   // }
+- (void)checkMessage:(NSString *)title message:(NSString *)msg {
+    UIAlertView *alertView = [[UIAlertView alloc]
+                              initWithTitle:title
+                              message:msg
+                              delegate:self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:@"NO",nil];
+    [alertView show];
+    
 }
 
 #pragma mark - Next Screen
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"goTimeLine"]) {
+    if (([[segue identifier] isEqualToString:@"goTimeLine"]) && (self.account.username != nil)) {
 
         TableViewController *vc = [segue destinationViewController];
-        
         vc.twitter = self.twitter;
         vc.account = self.account;
     }
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    // OK
+    if (buttonIndex == 0) {
+        if (self.account.username != nil) {
+            [self callTableView];
+        }
+    } else {
+        [self loginOnTheWebAction];
+        
+    }
+}
+
+#pragma mark Call screen
+-(void)callTableView{
+    
+    NSString * storyboardName = @"Main";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    TableViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"table"];
+    vc.twitter = self.twitter;
+    vc.account = self.account;
+
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+#pragma mark Internet
+- (BOOL)currentNetworkStatus{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
 
 @end

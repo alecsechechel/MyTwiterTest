@@ -68,16 +68,6 @@
                                 </state>
                                 <connections>
                                     <action selector="goTwitter:" destination="oLE-g3-dWG" eventType="touchUpInside" id="pxg-Gh-l95"/>
-                                    <segue destination="d8d-pv-rGD" kind="show" identifier="goTimeLine" id="hun-Fy-cxi"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9e-aO-Yp1">
-                                <rect key="frame" x="101" y="221" width="118" height="37"/>
-                                <state key="normal" title="Autorization">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="goAutorization:" destination="oLE-g3-dWG" eventType="touchUpInside" id="JFh-le-iCD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -89,6 +79,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="AZr-M7-Rm6"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <segue destination="d8d-pv-rGD" kind="show" identifier="goTimeLine" id="5kH-kF-5a0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fnN-Pk-38i" sceneMemberID="firstResponder"/>
             </objects>
@@ -97,7 +90,7 @@
         <!--Table View Controller-->
         <scene sceneID="B5w-2E-vyO">
             <objects>
-                <viewController id="d8d-pv-rGD" customClass="TableViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="table" id="d8d-pv-rGD" customClass="TableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MuW-TT-msW"/>
                         <viewControllerLayoutGuide type="bottom" id="3b8-HM-OAB"/>
@@ -106,6 +99,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ivf-q0-JXH">
+                                <rect key="frame" x="-5" y="64" width="325" height="416"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="d8d-pv-rGD" id="1xM-Tv-04G"/>
+                                    <outlet property="delegate" destination="d8d-pv-rGD" id="fOE-Yf-ogp"/>
+                                </connections>
+                            </tableView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYU-hW-WEk">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
@@ -123,26 +124,16 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ivf-q0-JXH">
-                                <rect key="frame" x="-5" y="64" width="325" height="416"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="416" id="Gac-fd-Tcc"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="dataSource" destination="d8d-pv-rGD" id="1xM-Tv-04G"/>
-                                    <outlet property="delegate" destination="d8d-pv-rGD" id="fOE-Yf-ogp"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MYU-hW-WEk" firstAttribute="leading" secondItem="vEy-DR-37h" secondAttribute="leading" id="ADi-ZO-LRk"/>
-                            <constraint firstItem="MYU-hW-WEk" firstAttribute="top" secondItem="MuW-TT-msW" secondAttribute="bottom" id="M5T-W8-FBv"/>
-                            <constraint firstAttribute="trailing" secondItem="Ivf-q0-JXH" secondAttribute="trailing" id="fzy-iG-Nvl"/>
-                            <constraint firstItem="Ivf-q0-JXH" firstAttribute="leading" secondItem="vEy-DR-37h" secondAttribute="leadingMargin" constant="-21" id="iXB-QU-2wi"/>
-                            <constraint firstItem="Ivf-q0-JXH" firstAttribute="bottom" secondItem="3b8-HM-OAB" secondAttribute="top" id="nea-72-s7F"/>
-                            <constraint firstItem="MYU-hW-WEk" firstAttribute="trailing" secondItem="Ivf-q0-JXH" secondAttribute="trailing" id="qJj-9w-bXL"/>
+                            <constraint firstAttribute="trailing" secondItem="Ivf-q0-JXH" secondAttribute="trailing" id="AWK-Nd-DsJ"/>
+                            <constraint firstItem="MYU-hW-WEk" firstAttribute="top" secondItem="MuW-TT-msW" secondAttribute="bottom" id="TgO-ZW-QQu"/>
+                            <constraint firstItem="Ivf-q0-JXH" firstAttribute="leading" secondItem="vEy-DR-37h" secondAttribute="leadingMargin" constant="-21" id="dQC-6d-4RX"/>
+                            <constraint firstItem="Ivf-q0-JXH" firstAttribute="bottom" secondItem="3b8-HM-OAB" secondAttribute="top" id="g8Y-Z9-Nfk"/>
+                            <constraint firstItem="Ivf-q0-JXH" firstAttribute="top" secondItem="MYU-hW-WEk" secondAttribute="bottom" id="jZp-i0-ouU"/>
+                            <constraint firstItem="Ivf-q0-JXH" firstAttribute="trailing" secondItem="MYU-hW-WEk" secondAttribute="trailing" id="lsX-QL-Yee"/>
+                            <constraint firstItem="MYU-hW-WEk" firstAttribute="leading" secondItem="vEy-DR-37h" secondAttribute="leading" id="o6p-5T-ArI"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
@@ -154,7 +145,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XRD-jI-lHG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="552" y="-124"/>
+            <point key="canvasLocation" x="655" y="-124"/>
         </scene>
     </scenes>
     <resources>

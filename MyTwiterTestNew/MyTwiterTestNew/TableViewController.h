@@ -14,5 +14,4 @@
 @property (nonatomic, strong) STTwitterAPI *twitter;
 @property (strong, nonatomic) ACAccount *account;
 
-
 @end

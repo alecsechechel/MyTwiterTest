@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[TableViewController tableView:cellForRowAtIndexPath:]:TableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.account.userFullName">
+            </PersistentString>
+            <PersistentString
+               value = "status valueForKey:@&quot;id&quot;">
+            </PersistentString>
+            <PersistentString
+               value = "self.account.username">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[TableViewController deleteTwitt]:TableViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[TableViewController swipeTableViewCellDidStartSwiping:]:TableViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__34-[TableViewController deleteTwitt]_block_invoke:TableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "url">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
